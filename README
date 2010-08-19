@@ -1,0 +1,37 @@
+This is the MovieStore-Client/Server-Application, an example project used for the Scala-Book
+http://www.hanser.de/buch.asp?isbn=978-3-446-42399-2&amp;area=Computer
+
+In order to use it, you need the Simple Build Tool
+http://code.google.com/p/simple-build-tool/
+
+As long as Akka 0.10 has not been released, you have to build it from source:
+
+$ git clone git://github.com/jboner/akka.git
+$ cd akka
+$ sbt update
+$ sbt dist
+$ sbt publish-local
+$ cd akka-sbt-plugin
+$ sbt publish-local
+
+Quickstart:
+
+Open one terminal and type:
+
+$ sbt
+> update
+> console
+scala> import org.obraun.moviestore._
+scala> import se.scalablesolutions.akka.actor.Actor._
+scala> val movieStoreService = actorOf[MovieStoreService].start
+
+Open another and type:
+
+$ sbt console
+scala> import org.obraun.moviestore._
+scala> val client = new MovieStoreClient(1)
+scala> import client._
+scala> show
+scala> rent(1)
+scala> show
+
