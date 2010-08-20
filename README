@@ -31,6 +31,7 @@ $ sbt console
 scala> import org.obraun.moviestore._
 scala> val client = new MovieStoreClient(1)
 scala> import client._
+scala> login
 scala> show
 scala> rent(1)
 scala> show
