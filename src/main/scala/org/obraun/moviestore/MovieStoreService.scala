@@ -37,13 +37,13 @@ class MovieStoreService
   with SessionManagement
   with ExampleData { service =>
 
-  import se.scalablesolutions.akka.stm.local.Ref
+  import akka.stm.Ref
   protected val available = Ref(Map[Int,Movie]())
   protected val rent = Ref(Map[Int,Movie]())
 
   addToStore(movies)
 
-  import se.scalablesolutions.akka.actor.Actor.actorOf
+  import akka.actor.Actor.actorOf
   def newMovieStore =
     actorOf(
       new MovieStore {
@@ -58,10 +58,10 @@ class MovieStoreService
       }
     ).start
 
-  override def init = {
-    import se.scalablesolutions.akka.remote.RemoteNode
-    RemoteNode.start("localhost",9999)
-    RemoteNode.register("moviestore:service",self)
+  override def preStart() = {
+    import akka.actor.Actor.remote
+    remote.start("localhost",9999)
+    remote.register("moviestore:service",self)
   }
 }
 // vim: set ts=2 sw=4 et:

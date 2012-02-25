@@ -32,12 +32,13 @@
  */
 package org.obraun.moviestore
 
-import se.scalablesolutions.akka.remote.RemoteClient
+import akka.actor.Actor.remote._
+import akka.actor.Actor._
 
 class MovieStoreClient(userID: Int) {
 
   val movieStore =
-    RemoteClient.actorFor(
+    actorFor(
       "moviestore:service",
       "localhost",
       9999
