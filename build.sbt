@@ -16,3 +16,5 @@ libraryDependencies += "se.scalablesolutions.akka" % "akka-actor" % "1.3"
 libraryDependencies += "se.scalablesolutions.akka" % "akka-remote" % "1.3"
 
 libraryDependencies += "se.scalablesolutions.akka" % "akka-stm" % "1.3"
+
+scalacOptions ++= Seq("-unchecked", "-deprecation")

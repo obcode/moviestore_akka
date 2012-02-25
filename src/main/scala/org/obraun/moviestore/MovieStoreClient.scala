@@ -49,7 +49,7 @@ class MovieStoreClient(userID: Int) {
   def logout = movieStore ! Logout(userID)
 
   def rent(serial: Int) = {
-    val result = movieStore !! Rent(userID, serial)
+    val result = (movieStore ? Rent(userID, serial)).as[Message]
     result match {
       case Some(SuccessfullyRent(_)) =>
         println("Successfully rent movie #"+serial)
@@ -62,7 +62,7 @@ class MovieStoreClient(userID: Int) {
   }
 
   def show = {
-    val result = movieStore !! ShowAvailable(userID)
+    val result = (movieStore ? ShowAvailable(userID)).as[Message]
     result match {
       case Some(ResultList(movies)) =>
         for((serial,title,filmrating) <- movies)
