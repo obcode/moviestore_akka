@@ -32,8 +32,8 @@
  */
 package org.obraun.moviestore
 
-import se.scalablesolutions.akka.actor.{Actor,ActorRef}
-import se.scalablesolutions.akka.actor.Actor.actorOf
+import akka.actor.{Actor,ActorRef}
+import akka.actor.Actor.actorOf
 
 trait SessionManagement extends Actor {
 
@@ -54,8 +54,8 @@ trait SessionManagement extends Actor {
         case Some(user) =>
           sessions.get(id) match {
             case None =>
-              log.info("User [%s] has logged in",
-                       user.toString)
+              // log.info("User [%s] has logged in",
+              //         user.toString)
               val session = actorOf(
                 new Session(user,self)
               )
@@ -65,7 +65,7 @@ trait SessionManagement extends Actor {
           }
       }
     case Logout(id) =>
-      log.info("User [%d] has logged out",id)
+      // log.info("User [%d] has logged out",id)
       val session = sessions(id)
       session.stop
       sessions -= id
@@ -75,8 +75,8 @@ trait SessionManagement extends Actor {
       sessions(userID) forward msg
   }
 
-  override def shutdown = {
-    log.info("Sessionmanagement is shutting down...")
+  override def postStop() = {
+    // log.info("Sessionmanagement is shutting down...")
     sessions foreach { case (_,session) => session.stop }
   }
 }

@@ -32,7 +32,7 @@
  */
 package org.obraun.moviestore
 
-import se.scalablesolutions.akka.actor.{Actor,ActorRef}
+import akka.actor.{Actor,ActorRef}
 
 class Session(user: User, moviestore: ActorRef)
   extends Actor {
@@ -51,6 +51,8 @@ class Session(user: User, moviestore: ActorRef)
           Error("Cannot rent movie #"+serial)
       )
   }
-  override def shutdown = moviestore.stop
+  override def postStop() = {
+    moviestore.stop
+  }
 }
 // vim: set ts=2 sw=4 et:

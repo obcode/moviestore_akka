@@ -32,15 +32,15 @@
  */
 package org.obraun.moviestore
 
-import se.scalablesolutions.akka.actor.Actor
+import akka.actor.Actor
 
 trait MovieStore extends Actor {
 
-  import se.scalablesolutions.akka.stm.local.Ref
+  import akka.stm.Ref
   protected val available: Ref[Map[Int,Movie]]
   protected val rent: Ref[Map[Int,Movie]]
 
-  import se.scalablesolutions.akka.stm.local.atomic
+  import akka.stm.atomic
   def addToStore(movie: Movie) {
     MovieStore.serial += 1
     atomic {
