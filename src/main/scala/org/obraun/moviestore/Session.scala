@@ -42,12 +42,12 @@ class Session(user: User, moviestore: ActorRef)
   def receive = {
     case msg @ ShowAvailable(_) =>
       self.reply(
-        moviestore !! AvailableList(age) getOrElse
+        (moviestore ? AvailableList(age)).as[Message] getOrElse
           Error("Cannot show movies!")
       )
     case Rent(_, serial) =>
       self.reply(
-        moviestore !! RentMovie(age, serial) getOrElse
+        (moviestore ? RentMovie(age, serial)).as[Message] getOrElse
           Error("Cannot rent movie #"+serial)
       )
   }
