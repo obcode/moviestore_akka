@@ -11,8 +11,8 @@ libraryDependencies +=
 
 resolvers += "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
 
-libraryDependencies += "se.scalablesolutions.akka" % "akka-actor" % "1.2"
+libraryDependencies += "se.scalablesolutions.akka" % "akka-actor" % "1.3"
 
-libraryDependencies += "se.scalablesolutions.akka" % "akka-remote" % "1.2"
+libraryDependencies += "se.scalablesolutions.akka" % "akka-remote" % "1.3"
 
-libraryDependencies += "se.scalablesolutions.akka" % "akka-stm" % "1.2"
+libraryDependencies += "se.scalablesolutions.akka" % "akka-stm" % "1.3"
